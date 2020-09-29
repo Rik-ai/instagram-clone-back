@@ -4,10 +4,17 @@ const mongoose = require ('mongoose')
 const Pusher = require ('pusher')
 const dbModel = require('./dbModel');
 
+
 //app config
 const app = express()
 const port = process.env.PORT || 8080
-
+const pusher = new Pusher({
+  appId: '1081779',
+  key: '47fac1b2cc2b969c3516',
+  secret: '378f2e6cfde38c44eb61',
+  cluster: 'eu',
+  useTLS: true
+});
 
 //middlewares
 app.use(express.json())
