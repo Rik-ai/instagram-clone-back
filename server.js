@@ -14,7 +14,16 @@ app.use(cors())
 
 
 //DB config
+const connection_url = 'mongodb+srv://admin:xn7CqE6Oik9ul72U@cluster0.nkfdf.mongodb.net/insta-cloneDB?retryWrites=true&w=majority'
+mongoose.connect (connection_url, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
 
+mongoose.connection.once('open', ()=>{
+    console.log('DB Connected')
+})
 
 //api routes
 app.get('/', (req, res) => res.status(200).send('hello world'))
