@@ -31,7 +31,7 @@ app.get('/', (req, res) => res.status(200).send('hello world'))
 
 app.post('/upload', (req, res) => {
     const body = req.body
-    
+
     dbModel.create(body, (err, data) => {
         if(err){
             set.status(500).send(err)
@@ -39,6 +39,16 @@ app.post('/upload', (req, res) => {
             res.status(201).send(data)
         }
 
+    })
+})
+
+app.get('/sync', (req, res) => {
+    dbModel.find((err, data) => {
+        if(err){
+            set.status(500).send(err)
+        } else {
+            res.status(200).send(data)
+        }
     })
 })
 
