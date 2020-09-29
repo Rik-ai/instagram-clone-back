@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require ('cors')
 const mongoose = require ('mongoose')
 const Pusher = require ('pusher')
+const dbModel = require('./dbModel');
 
 //app config
 const app = express()
@@ -27,6 +28,19 @@ mongoose.connection.once('open', ()=>{
 
 //api routes
 app.get('/', (req, res) => res.status(200).send('hello world'))
+
+app.post('/upload', (req, res) => {
+    const body = req.body
+    
+    dbModel.create(body, (err, data) => {
+        if(err){
+            set.status(500).send(err)
+        } else {
+            res.status(201).send(data)
+        }
+
+    })
+})
 
 //listener
 app.listen(port, () => console.log(`listening on localhost:${port}`))
